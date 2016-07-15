@@ -24,7 +24,7 @@ class ZebraLabel
      * Height explain in dots
      */
     private $heightDots;
-    private $zebraPrintMode = ZebraPrintMode::TEAR_OFF;
+    private $zebraPrintMode;
     private $printerOptions;
     private $zebraElements  = [];
 
@@ -36,11 +36,13 @@ class ZebraLabel
      *            width explain in dots
      * @param printerOptions
      */
-    public function __construct($widthDots, $heightDots, $printerOptions)
+    public function __construct($widthDots = null, $heightDots = null, $printerOptions = null)
     {
         $this->widthDots      = $widthDots;
         $this->heightDots     = $heightDots;
         $this->printerOptions = $printerOptions;
+        $this->zebraPrintMode = new ZebraPrintMode(ZebraPrintMode::TEAR_OFF);
+        $this->printerOptions = new PrinterOptions();
     }
 
     /**
@@ -153,23 +155,23 @@ class ZebraLabel
     {
         $zpl = '';
         $zpl .= ZplUtils::zplCommandSautLigne("XA"); //Start Label
-        $zpl .= zebraPrintMode::getZplCode();
+        $zpl .= $this->zebraPrintMode->getZplCode();
 
-        if (widthDots != null) {
+        if ($this->widthDots != null) {
 //Define width for label
-            $zpl .= ZplUtils::zplCommandSautLigne("PW", $this->widthDots);
+            $zpl .= ZplUtils::zplCommandSautLigne("PW", [$this->widthDots]);
         }
 
-        if (heightDots != null) {
-            $zpl .= ZplUtils::zplCommandSautLigne("LL", $this->heightDots);
+        if ($this->heightDots != null) {
+            $zpl .= ZplUtils::zplCommandSautLigne("LL", [$this->heightDots]);
         }
 
 //Default Font and Size
         if ($this->printerOptions->getDefaultZebraFont() != null && $this->printerOptions->getDefaultFontSize() != null) {
-            $zpl .= ZplUtils::zplCommandSautLigne("CF", ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), $this->printerOptions->getDefaultFontSize(), $this->printerOptions->getZebraPPP()));
+            $zpl .= ZplUtils::zplCommandSautLigne("CF", [ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), $this->printerOptions->getDefaultFontSize(), $this->printerOptions->getZebraPPP())]);
         }
-        foreach ($this->zebraElement as $zebraElements) {
-            $zpl .= $zebraElement->getZplCode($this->printerOptions);
+        foreach ($this->zebraElements as $zebraElements) {
+            $zpl .= $zebraElements->getZplCode($this->printerOptions);
         }
         $zpl .= ZplUtils::zplCommandSautLigne("XZ"); //End Label
         return $zpl;
@@ -195,7 +197,7 @@ class ZebraLabel
 
             $graphic->setColor(Color::BLACK);
             $graphic->setFont(new Font("Arial", Font::BOLD, 11));
-            foreach ($this->zebraElement as $zebraElements) {
+            foreach ($this->zebraElements as $zebraElements) {
                 $zebraElements->drawPreviewGraphic($this->printerOptions, $graphic);
             }
             return $image;

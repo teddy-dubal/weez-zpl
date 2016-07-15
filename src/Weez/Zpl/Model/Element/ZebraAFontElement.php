@@ -22,7 +22,7 @@ class ZebraAFontElement extends ZebraElement
 {
 
     private $zebraFont;
-    private $zebraRotation = ZebraRotation::NORMAL;
+    private $zebraRotation;
     private $dotHeigth;
     private $dotsWidth;
 
@@ -41,7 +41,7 @@ class ZebraAFontElement extends ZebraElement
     public function __construct($zebraFont, $zebraRotation, $dotHeigth, $dotsWidth)
     {
         $this->zebraFont     = $zebraFont;
-        $this->zebraRotation = $zebraRotation;
+        $this->zebraRotation = $zebraRotation ? : new ZebraRotation(ZebraRotation::NORMAL);
         $this->dotHeigth     = $dotHeigth;
         $this->dotsWidth     = $dotsWidth;
     }
@@ -52,7 +52,8 @@ class ZebraAFontElement extends ZebraElement
 
     public function getZplCode($printerOptions)
     {
-        return ZplUtils::zplCommandSautLigne("A", ZebraFont::getLetter(), ZebraRotation::getLetter(), $this->dotHeigth, $this->dotsWidth);
+        return ZplUtils::zplCommandSautLigne("A", [$this->zebraFont->getLetter(),
+                    $this->zebraRotation->getLetter(), $this->dotHeigth, $this->dotsWidth]);
     }
 
 }

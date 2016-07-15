@@ -39,7 +39,8 @@ class ZebraGraficBox extends ZebraElement
         $zpl = '';
         $zpl .= $this->getZplCodePosition();
         $zpl .= "\n";
-        $zpl .= ZplUtils::zplCommand("GB", $this->width, $this->height, $this->borderTickness, $this->lineColor);
+        $zpl .= ZplUtils::zplCommand("GB", [$this->width, $this->height, $this->borderTickness,
+                    $this->lineColor]);
         $zpl .= "^FS";
         $zpl .= "\n";
         return $zpl;
@@ -49,7 +50,7 @@ class ZebraGraficBox extends ZebraElement
     {
         $zpl = '';
         if ($this->positionX != null && $this->positionY != null) {
-            $zpl .= ZplUtils::zplCommand("FO", $this->positionX, $this->positionY);
+            $zpl .= ZplUtils::zplCommand("FO", [$this->positionX, $this->positionY]);
         }
         return $zpl;
     }

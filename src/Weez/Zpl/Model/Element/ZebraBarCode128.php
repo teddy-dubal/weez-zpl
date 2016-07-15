@@ -17,16 +17,31 @@ class ZebraBarCode128 extends ZebraBarCode
 {
 
     private $checkDigit43 = false;
-
-    public function __construct($positionX, $positionY, $text, $barCodeHeigth, $showTextInterpretation, $showTextInterpretationAbove)
+    /**
+     *
+     * @param type $positionX
+     * @param type $positionY
+     * @param type $text
+     * @param type $barCodeHeigth
+     * @param type $barCodeWidth
+     * @param type $showTextInterpretation
+     * @param type $showTextInterpretationAbove
+     * @param type $wideBarRatio
+     */
+    public function __construct($positionX, $positionY, $text, $barCodeHeigth = null, $barCodeWidth = null, $showTextInterpretation = false, $showTextInterpretationAbove = false, $wideBarRatio = null)
     {
-        parent::__construct($positionX, $positionY, $text, $barCodeHeigth, $showTextInterpretation, $showTextInterpretationAbove);
+        parent::__construct($positionX, $positionY, $text, $barCodeHeigth, $barCodeWidth, $showTextInterpretation, $showTextInterpretationAbove, $wideBarRatio);
     }
 
     public function getZplCode($printerOptions)
     {
         $zpl = $this->getStartZplCodeBuilder();
-        $zpl .= ZplUtils::zplCommandSautLigne("BC", ZebraRotation::getLetter(), $this->barCodeHeigth, $this->showTextInterpretation, $this->showTextInterpretationAbove, $this->checkDigit43);
+        $zpl .= ZplUtils::zplCommandSautLigne("BC", [
+                    $this->zebraRotation->getLetter(),
+                    $this->barCodeHeigth,
+                    $this->showTextInterpretation,
+                    $this->showTextInterpretationAbove,
+                    $this->checkDigit43]);
         $zpl .= "^FD";
         $zpl .= $this->text;
         $zpl .= ZplUtils::zplCommandSautLigne("FS");

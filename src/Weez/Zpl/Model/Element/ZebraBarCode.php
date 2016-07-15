@@ -20,7 +20,7 @@ abstract class ZebraBarCode extends ZebraElement
     protected $barCodeHeigth;
     protected $moduleWidth;
     protected $wideBarRatio;
-    protected $zebraRotation = ZebraRotation::NORMAL;
+    protected $zebraRotation;
 
     /**
      * Parameters used to print text( default on bellow)
@@ -50,14 +50,17 @@ abstract class ZebraBarCode extends ZebraElement
      * @param showTextInterpretationAbove
      *            true to add above, false to add below
      */
-    public function __construct($positionX, $positionY, $text, $barCodeHeigth = null, $showTextInterpretation = null, $showTextInterpretationAbove = null)
+    public function __construct($positionX, $positionY, $text, $barCodeHeigth = null, $barCodeWidth = null, $showTextInterpretation = false, $showTextInterpretationAbove = false, $wideBarRatio = null)
     {
         $this->positionX                   = $positionX;
         $this->positionY                   = $positionY;
         $this->barCodeHeigth               = $barCodeHeigth;
+        $this->moduleWidth                 = $barCodeWidth;
+        $this->wideBarRatio                = $wideBarRatio;
         $this->text                        = $text;
         $this->showTextInterpretation      = $showTextInterpretation;
         $this->showTextInterpretationAbove = $showTextInterpretationAbove;
+        $this->zebraRotation               = new ZebraRotation(ZebraRotation::NORMAL);
     }
 
     public function getStartZplCodeBuilder()
@@ -67,7 +70,11 @@ abstract class ZebraBarCode extends ZebraElement
         $zpl .= $this->getZplCodePosition();
         $zpl .= "\n";
         if ($this->moduleWidth != null) {
-            $zpl .= ZplUtils::zplCommandSautLigne("BY", $this->moduleWidth, $this->wideBarRatio, $this->barCodeHeigth);
+            $zpl .= ZplUtils::zplCommandSautLigne("BY", [
+                        $this->moduleWidth,
+                        $this->wideBarRatio,
+                        $this->barCodeHeigth
+            ]);
         }
         return $zpl;
     }

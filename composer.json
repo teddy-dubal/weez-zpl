@@ -7,5 +7,17 @@
             "email": "teddy.dona@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "fzaninotto/faker": "* v1.6.0",
+        "mockery/mockery": "^0.9.5",
+        "phpunit/phpunit": "^5.4",
+        "phpspec/phpspec": "^2.5"
+    },
+    "autoload": {
+        "psr-0": {
+            "tests": "",
+            "Weez": "src/"
+        }
+    }
 }

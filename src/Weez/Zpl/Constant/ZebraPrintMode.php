@@ -7,47 +7,55 @@ namespace Weez\Zpl\Constant;
  *
  * @author teddy
  */
-class ZebraPrintMode {
+class ZebraPrintMode
+{
 
     const TEAR_OFF          = "T";
     const REWIND            = "R";
     const PEEL_OFF_SELECT   = true;
     const PEEL_OFF_NOSELECT = false;
     const CUTTER            = "C";
+
 //TEAR_OFF("T"), REWIND("R"), PEEL_OFF_SELECT("P", true), PEEL_OFF_NOSELECT("P", false), CUTTER("C");
     private $desiredMode;
-    private $prePeelSelect;
+    private $prePeelSelect = '';
 
-    public function __construct($desiredMode, $prePeelSelectB) {
+    public function __construct($desiredMode, $prePeelSelectB = null)
+    {
         $this->desiredMode = $desiredMode;
-        if ($prePeelSelectB) {
-            $this->$prePeelSelect = ",Y";
-        } else {
-            $this->$prePeelSelect = ",N";
+        if (null != $prePeelSelectB) {
+            if ($prePeelSelectB) {
+                $this->prePeelSelect = ",Y";
+            } else {
+                $this->prePeelSelect = ",N";
+            }
         }
     }
 
     /**
      * @return the desiredMode
      */
-    public function getDesiredMode() {
+    public function getDesiredMode()
+    {
         return $this->desiredMode;
     }
 
     /**
      * @return the prePeelSelect
      */
-    public function getPrePeelSelect() {
+    public function getPrePeelSelect()
+    {
         return $this->prePeelSelect;
     }
 
     /**
      * Function which return ^MM command
      *
-     * @return
+     * @return string
      */
-    public function getZplCode() {
-        return "^MM" + $this->desiredMode + $this->prePeelSelect + "\n";
+    public function getZplCode()
+    {
+        return "^MM" . $this->desiredMode . $this->prePeelSelect . "\n";
     }
 
 }

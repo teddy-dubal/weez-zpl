@@ -23,7 +23,7 @@ class ZebraText extends ZebraElement
      * Not in dots.
      */
     protected $fontSize      = null;
-    protected $zebraRotation = ZebraRotation::NORMAL;
+    protected $zebraRotation;
     protected $text;
 
     public function __construct($text, $positionX, $positionY, $zebraFont, $fontSize, $zebraRotation)
@@ -34,6 +34,7 @@ class ZebraText extends ZebraElement
         $this->text          = $text;
         $this->positionX     = $positionX;
         $this->positionY     = $positionY;
+        $this->zebraRotation = $zebraRotation ? : new ZebraRotation(ZebraRotation::NORMAL);
     }
 
     /* (non-Javadoc)
@@ -48,15 +49,17 @@ class ZebraText extends ZebraElement
         if ($this->fontSize != null && $this->zebraFont != null) {
             //This element has specified size and font
             $dimension = ZplUtils::extractDotsFromFont($this->zebraFont, $this->fontSize, $this->printerOptions->getZebraPPP());
-            $zpl .= ZplUtils::zplCommand("A", ZebraFont::getLetter() + ZebraRotation::getLetter(), $dimension[0], $dimension[1]);
+            $zpl .= ZplUtils::zplCommand("A", [$this->zebraFont->getLetter() . $this->zebraRotation->getLetter(),
+                        $dimension[0], $dimension[1]]);
         } else if ($this->fontSize != null && $this->printerOptions->getDefaultZebraFont() != null) {
             //This element has specified size, but with default font
             $dimension = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), $this->fontSize, $this->printerOptions->getZebraPPP());
-            $zpl .= ZplUtils::zplCommand("A", $this->printerOptions->getDefaultZebraFont()->getLetter() + ZebraRotation::getLetter(), $dimension[0], $dimension[1]);
+            $zpl .= ZplUtils::zplCommand("A", [$this->printerOptions->getDefaultZebraFont()->getLetter() . $this->zebraRotation->getLetter(),
+                        $dimension[0], $dimension[1]]);
         }
 
         $zpl .= "^FH\\^FD"; //We allow hexadecimal and start element
-        $zpl .= ZplUtils::convertAccentToZplAsciiHexa(text);
+        $zpl .= ZplUtils::convertAccentToZplAsciiHexa($text);
         $zpl .= ZplUtils::zplCommandSautLigne("FS");
 
         return $zpl;

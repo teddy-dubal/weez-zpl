@@ -25,7 +25,7 @@ class ZebraRotation {
      * @return the letter
      */
     public function getLetter() {
-        return $letter;
+        return $this->letter;
     }
 
 }

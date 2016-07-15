@@ -12,13 +12,13 @@ use Weez\Zpl\Constant\ZebraPPP;
 class PrinterOptions
 {
 
-    private $zebraPPP         = ZebraPPP::DPI_300;
+    private $zebraPPP;
     private $defaultZebraFont = null;
     private $defaultFontSize  = null;
 
-    public function __construct($zebraPPP)
+    public function __construct($zebraPPP = null)
     {
-        $this->zebraPPP = $zebraPPP;
+        $this->zebraPPP = $zebraPPP ? : ZebraPPP::DPI_300;
     }
 
     /**

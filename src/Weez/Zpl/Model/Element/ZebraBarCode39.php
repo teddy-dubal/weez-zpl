@@ -26,7 +26,9 @@ class ZebraBarCode39 extends ZebraBarCode
     public function getZplCode($printerOptions)
     {
         $zpl = $this->getStartZplCodeBuilder();
-        $zpl .= ZplUtils::zplCommandSautLigne("B3", ZebraRotation::getLetter(), $this->barCodeHeigth, $this->checkDigit43, $this->showTextInterpretation, $this->showTextInterpretationAbove);
+        $zpl .= ZplUtils::zplCommandSautLigne("B3", [$this->zebraRotation->getLetter(),
+                    $this->barCodeHeigth, $this->checkDigit43, $this->showTextInterpretation,
+                    $this->showTextInterpretationAbove]);
         $zpl .= "^FD";
         $zpl .= $this->text;
         $zpl .= ZplUtils::zplCommandSautLigne("FS");

@@ -77,7 +77,7 @@ abstract class ZebraElement {
     protected function getZplCodePosition() {
         $zpl = "";
         if ($this->positionX != null && $this->positionY != null) {
-            $zpl .= ZplUtils::zplCommand("FT", $this->positionX, $this->positionY);
+            $zpl .= ZplUtils::zplCommand("FT", [$this->positionX, $this->positionY]);
         }
         return $zpl;
     }

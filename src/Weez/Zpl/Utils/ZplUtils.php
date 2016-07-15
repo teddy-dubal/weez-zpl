@@ -22,10 +22,11 @@ class ZplUtils
      */
     private static function variableObjectToZplCode($object)
     {
-        if ($object != null) {
+        if (!is_null($object)) {
             if (is_numeric($object)) {
                 return ((int) $object);
             } else if (is_bool($object)) {
+                
                 if (((bool) $object)) {
                     return "Y";
                 } else {
@@ -48,9 +49,9 @@ class ZplUtils
      *            list variable
      * @return
      */
-    public static function zplCommand($command, $variables)
+    public static function zplCommand($command, $variables = null)
     {
-        $zpl = '';
+        $zpl          = '';
         $zpl .= "^";
         $zpl .= $command;
         $cv  = count($variables);
@@ -76,7 +77,7 @@ class ZplUtils
      *            list variable
      * @return
      */
-    public static function zplCommandSautLigne($command, $variables)
+    public static function zplCommandSautLigne($command, $variables = null)
     {
         $zpl = self::zplCommand($command, $variables);
         $zpl .= "\n";
@@ -129,9 +130,9 @@ class ZplUtils
     public static function convertAccentToZplAsciiHexa($str)
     {
         if ($str != null) {
-            $str = $str . replace("é", "\\82");
-            $str = $str . replace("à", "\\85");
-            $str = $str . replace("è", "\\8A");
+            $str = str_replace("é", "\\82", $str);
+            $str = str_replace("à", "\\85", $str);
+            $str = str_replace("è", "\\8A", $str);
         }
         return $str;
     }
