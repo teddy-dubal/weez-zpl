@@ -1,8 +1,8 @@
 <?php
 namespace Weez\Zpl\Model\Element;
 
-use Weez\Zpl\Constant\ZebraFont;
 use Weez\Zpl\Constant\ZebraRotation;
+use Weez\Zpl\Model\PrinterOptions;
 use Weez\Zpl\Model\ZebraElement;
 use Weez\Zpl\Utils\ZplUtils;
 
@@ -43,17 +43,21 @@ class ZebraAFontElement extends ZebraElement
         $this->zebraFont     = $zebraFont;
         $this->zebraRotation = $zebraRotation ? : new ZebraRotation(ZebraRotation::NORMAL);
         $this->dotHeigth     = $dotHeigth;
-        $this->dotsWidth     = $dotsWidth;
+        $this->dotsWidth      = $dotsWidth;
     }
 
     /* (non-Javadoc)
      * @see fr.w3blog.zpl.model.ZebraElement#getZplCode(fr.w3blog.zpl.model.PrinterOptions)
      */
 
-    public function getZplCode($printerOptions)
+    public function getZplCode($printerOptions = null)
     {
-        return ZplUtils::zplCommandSautLigne("A", [$this->zebraFont->getLetter(),
-                    $this->zebraRotation->getLetter(), $this->dotHeigth, $this->dotsWidth]);
+        return ZplUtils::zplCommandSautLigne("A", [
+                    $this->zebraFont->getLetter(),
+                    $this->zebraRotation->getLetter(),
+                    $this->dotHeigth,
+                    $this->dotsWidth
+        ]);
     }
 
 }

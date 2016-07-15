@@ -40,7 +40,6 @@ class ZebraLabel
     {
         $this->widthDots      = $widthDots;
         $this->heightDots     = $heightDots;
-        $this->printerOptions = $printerOptions;
         $this->zebraPrintMode = new ZebraPrintMode(ZebraPrintMode::TEAR_OFF);
         $this->printerOptions = new PrinterOptions();
     }

@@ -33,7 +33,7 @@ class ZebraBarCode128 extends ZebraBarCode
         parent::__construct($positionX, $positionY, $text, $barCodeHeigth, $barCodeWidth, $showTextInterpretation, $showTextInterpretationAbove, $wideBarRatio);
     }
 
-    public function getZplCode($printerOptions)
+    public function getZplCode($printerOptions = null)
     {
         $zpl = $this->getStartZplCodeBuilder();
         $zpl .= ZplUtils::zplCommandSautLigne("BC", [

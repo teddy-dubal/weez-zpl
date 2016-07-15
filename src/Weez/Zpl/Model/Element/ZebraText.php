@@ -4,6 +4,7 @@ namespace Weez\Zpl\Model\Element;
 
 use Weez\Zpl\Constant\ZebraFont;
 use Weez\Zpl\Constant\ZebraRotation;
+use Weez\Zpl\Model\PrinterOptions;
 use Weez\Zpl\Model\ZebraElement;
 use Weez\Zpl\Utils\ZplUtils;
 
@@ -26,22 +27,31 @@ class ZebraText extends ZebraElement
     protected $zebraRotation;
     protected $text;
 
-    public function __construct($text, $positionX, $positionY, $zebraFont, $fontSize, $zebraRotation = null)
+    /**
+     *
+     * @param type $text
+     * @param type $positionX
+     * @param type $positionY
+     * @param type $fontSize
+     * @param type $zebraFont
+     * @param type $zebraRotation
+     */
+    public function __construct($text, $positionX, $positionY, $fontSize = null, $zebraFont = null, $zebraRotation = null)
     {
         $this->zebraFont     = $zebraFont;
         $this->fontSize      = $fontSize;
-        $this->zebraRotation = $zebraRotation;
+        $this->zebraRotation = $zebraRotation ? : new ZebraRotation(ZebraRotation::NORMAL);
         $this->text          = $text;
         $this->positionX     = $positionX;
-        $this->positionY     = $positionY;
-        $this->zebraRotation = $zebraRotation ? : new ZebraRotation(ZebraRotation::NORMAL);
+        $this->positionY      = $positionY;
+        $this->printerOptions = new PrinterOptions();
     }
 
     /* (non-Javadoc)
      * @see fr.w3blog.zpl.model.element.ZebraElement#getZplCode(fr.w3blog.zpl.model.PrinterOptions)
      */
 
-    public function getZplCode($printerOptions)
+    public function getZplCode($printerOptions = null)
     {
         $zpl = '';
         $zpl .= $this->getZplCodePosition();
@@ -59,7 +69,7 @@ class ZebraText extends ZebraElement
         }
 
         $zpl .= "^FH\\^FD"; //We allow hexadecimal and start element
-        $zpl .= ZplUtils::convertAccentToZplAsciiHexa($text);
+        $zpl .= ZplUtils::convertAccentToZplAsciiHexa($this->text);
         $zpl .= ZplUtils::zplCommandSautLigne("FS");
 
         return $zpl;

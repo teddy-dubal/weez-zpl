@@ -25,7 +25,7 @@ class ZebraNativeZpl extends ZebraElement
      * @see fr.w3blog.zpl.model.ZPLElement#getZplCode()
      */
 
-    public function getZplCode($printerOptions)
+    public function getZplCode($printerOptions = null)
     {
         return $this->zplCode;
     }
