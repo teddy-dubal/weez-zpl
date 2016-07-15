@@ -3,6 +3,8 @@
 
 namespace Weez\Zpl\Model;
 
+use Weez\Zpl\Utils\ZplUtils;
+
 /**
  * Description of ZebraElement
  *
@@ -38,7 +40,7 @@ abstract class ZebraElement {
      *            the positionX to set
      */
     public function setPositionX($positionX) {
-        $this->$positionX = $positionX;
+        $this->positionX = $positionX;
         return $this;
     }
 
@@ -46,7 +48,7 @@ abstract class ZebraElement {
      * @return the positionY
      */
     public function getPositionY() {
-        return positionY;
+        return $this->positionY;
     }
 
     /**
@@ -54,7 +56,7 @@ abstract class ZebraElement {
      *            the positionY to set
      */
     public function setPositionY($positionY) {
-        $this->$positionY = $positionY;
+        $this->positionY = $positionY;
         return $this;
     }
 
@@ -74,8 +76,8 @@ abstract class ZebraElement {
      */
     protected function getZplCodePosition() {
         $zpl = "";
-        if ($positionX != null && $positionY != null) {
-//$zpl.append(ZplUtils.zplCommand("FT", positionX, positionY));
+        if ($this->positionX != null && $this->positionY != null) {
+            $zpl .= ZplUtils::zplCommand("FT", $this->positionX, $this->positionY);
         }
         return $zpl;
     }
@@ -91,18 +93,18 @@ abstract class ZebraElement {
      * @param graphic
      */
     public function drawPreviewGraphic($printerOptions, $graphic) {
-        if ($defaultDrawGraphic) {
+        if ($this->defaultDrawGraphic) {
             $top  = 0;
             $left = 0;
-            if ($positionX != null) {
-                $left = round(($positionX / $printerOptions->getZebraPPP()->getDotByMm()) * 10);
+            if ($this->positionX != null) {
+                $left = round(($this->positionX / $printerOptions->getZebraPPP()->getDotByMm()) * 10);
             }
-            if ($positionY != null) {
-                $top = round(($positionY / $printerOptions->getZebraPPP()->getDotByMm()) * 10);
+            if ($this->positionY != null) {
+                $top = round(($this->positionY / $printerOptions->getZebraPPP()->getDotByMm()) * 10);
             }
             $graphic->setColor(Color::BLACK);
             $graphic->drawRect($left, $top, 100, 20);
-            $this->drawTopString($graphic, new Font("Arial", Font . BOLD, 11), "Default", $left, $top);
+            $this->drawTopString($graphic, new Font("Arial", Font::BOLD, 11), "Default", $left, $top);
         }
     }
 
@@ -121,7 +123,7 @@ abstract class ZebraElement {
         $graphic->setFont($font);
         $fm         = $graphic->getFontMetrics($font);
         $rect       = $fm->getStringBounds($text, $graphic);
-        $textHeight = (int) ($rect->getHeight());
+        $textHeight = (int) $rect->getHeight();
         $positionY  = $positionY + $textHeight;
         $graphic->drawString($text, $positionX, $positionY); // Draw the string.
     }

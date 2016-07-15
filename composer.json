@@ -1,0 +1,11 @@
+{
+    "name": "vendor/weez-zpl",
+    "description": "Description of project weez-zpl.",
+    "authors": [
+        {
+            "name": "Teddy Dona",
+            "email": "teddy.dona@gmail.com"
+        }
+    ],
+    "require": {}
+}

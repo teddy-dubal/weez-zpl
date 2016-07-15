@@ -2,7 +2,9 @@
 
 namespace Weez\Zpl\Model;
 
+use Exception;
 use Weez\Zpl\Constant\ZebraPrintMode;
+use Weez\Zpl\Utils\ZplUtils;
 
 /**
  * Description of ZebraLabel
@@ -150,7 +152,6 @@ class ZebraLabel
     public function getZplCode()
     {
         $zpl = '';
-
         $zpl .= ZplUtils::zplCommandSautLigne("XA"); //Start Label
         $zpl .= zebraPrintMode::getZplCode();
 
@@ -199,7 +200,7 @@ class ZebraLabel
             }
             return $image;
         } else {
-            throw new UnsupportedOperationException("Graphics Preview is only available ont label sized");
+            throw new Exception("Graphics Preview is only available ont label sized");
         }
     }
 
