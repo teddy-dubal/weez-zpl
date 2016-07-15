@@ -26,7 +26,7 @@ class ZebraText extends ZebraElement
     protected $zebraRotation;
     protected $text;
 
-    public function __construct($text, $positionX, $positionY, $zebraFont, $fontSize, $zebraRotation)
+    public function __construct($text, $positionX, $positionY, $zebraFont, $fontSize, $zebraRotation = null)
     {
         $this->zebraFont     = $zebraFont;
         $this->fontSize      = $fontSize;
