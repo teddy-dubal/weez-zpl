@@ -33,8 +33,7 @@ class ZebraLabelTest extends TestCase
         $this->assertEquals("^XA\n^MMT\n^PW500\n^LL760\n^XZ\n", $zebraLabel->getZplCode());
     }
 
-    public function testZplOutput2()
-    {
+    public function testZplOutput2() {
         $zebraLabel = new ZebraLabel(912, 912);
         $zebraLabel->setDefaultZebraFont(new ZebraFont(ZebraFont::ZEBRA_ZERO));
         $zebraLabel->addElement(new ZebraText(10, 84, "Product:", 14));
@@ -53,8 +52,6 @@ class ZebraLabelTest extends TestCase
         $zebraLabel->addElement(new ZebraText(180, 520, "0035", 11));
         $zebraLabel->addElement(new ZebraText(10, 596, "Ref client:", 11));
         $zebraLabel->addElement(new ZebraText(180, 599, "1234", 11));
-        echo $zebraLabel->getZplCode();
-        exit;
         $this->assertEquals(1, 1);
     }
 

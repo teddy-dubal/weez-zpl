@@ -18,7 +18,7 @@ class PrinterOptions
 
     public function __construct($zebraPPP = null)
     {
-        $this->zebraPPP = $zebraPPP ? : ZebraPPP::DPI_300;
+        $this->zebraPPP = $zebraPPP ? : new ZebraPPP(ZebraPPP::DPI_300);
     }
 
     /**

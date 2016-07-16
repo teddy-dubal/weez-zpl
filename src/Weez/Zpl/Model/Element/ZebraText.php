@@ -57,12 +57,12 @@ class ZebraText extends ZebraElement
         
         if (!is_null($this->fontSize) && !is_null($this->zebraFont)) {
             //This element has specified size and font
-            $dimension = ZplUtils::extractDotsFromFont($this->zebraFont, $this->fontSize, $printerOptions->getZebraPPP());
+            $dimension = ZplUtils::extractDotsFromFont($this->zebraFont, $this->fontSize, $printerOptions->getZebraPPP()->getDotByMm());
             $zpl .= ZplUtils::zplCommand("A", [$this->zebraFont->getLetter() . $this->zebraRotation->getLetter(),
                         $dimension[0], $dimension[1]]);
         } else if (!is_null($this->fontSize) && !is_null($printerOptions->getDefaultZebraFont())) {
             //This element has specified size, but with default font
-            $dimension = ZplUtils::extractDotsFromFont($printerOptions->getDefaultZebraFont(), $this->fontSize, $printerOptions->getZebraPPP());
+            $dimension = ZplUtils::extractDotsFromFont($printerOptions->getDefaultZebraFont(), $this->fontSize, $printerOptions->getZebraPPP()->getDotByMm());
             $zpl .= ZplUtils::zplCommand("A", [$printerOptions->getDefaultZebraFont()->getLetter() . $this->zebraRotation->getLetter(),
                         $dimension[0], $dimension[1]]);
         }
@@ -96,16 +96,16 @@ class ZebraText extends ZebraElement
             $font = null;
             if ($this->fontSize != null && $this->zebraFont != null) {
                 //This element has specified size and font
-                $dimension = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), $this->fontSize, $this->printerOptions->getZebraPPP());
+                $dimension = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), $this->fontSize, $this->printerOptions->getZebraPPP()->getDotByMm());
 
                 $font = new Font(ZebraFont::findBestEquivalentFontForPreview($this->zebraFont), Font::BOLD, $dimension[0]);
             } else if ($this->fontSize != null && $this->printerOptions->getDefaultZebraFont() != null) {
                 //This element has specified size, but with default font
-                $dimensionPoint = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), fontSize, $this->printerOptions->getZebraPPP());
+                $dimensionPoint = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), fontSize, $this->printerOptions->getZebraPPP()->getDotByMm());
                 $font           = new Font(ZebraFont::findBestEquivalentFontForPreview($this->printerOptions->getDefaultZebraFont()), Font::BOLD, round(dimensionPoint[0] / 1.33));
             } else {
                 //Default font on Printer Zebra
-                $dimensionPoint = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), 15, $this->printerOptions->getZebraPPP());
+                $dimensionPoint = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), 15, $this->printerOptions->getZebraPPP()->getDotByMm());
 
                 $font = new Font(ZebraFont::findBestEquivalentFontForPreview(ZebraFont::ZEBRA_A), Font::BOLD, $dimensionPoint[0]);
             }

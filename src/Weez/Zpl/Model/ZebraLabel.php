@@ -51,7 +51,7 @@ class ZebraLabel
         $this->widthDots      = $widthDots;
         $this->heightDots     = $heightDots;
         $this->zebraPrintMode = new ZebraPrintMode(ZebraPrintMode::TEAR_OFF);
-        $this->printerOptions = new PrinterOptions();
+        $this->printerOptions = $printerOptions ? : new PrinterOptions();
     }
 
     /**
@@ -183,7 +183,7 @@ class ZebraLabel
 
 //Default Font and Size
         if ($this->printerOptions->getDefaultZebraFont() != null && $this->printerOptions->getDefaultFontSize() != null) {
-            $zpl .= ZplUtils::zplCommandSautLigne("CF", [ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), $this->printerOptions->getDefaultFontSize(), $this->printerOptions->getZebraPPP())]);
+            $zpl .= ZplUtils::zplCommandSautLigne("CF", [ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), $this->printerOptions->getDefaultFontSize(), $this->printerOptions->getZebraPPP()->getDotByMm())]);
         }
         foreach ($this->zebraElements as $zebraElements) {
             $zpl .= $zebraElements->getZplCode($this->printerOptions);
