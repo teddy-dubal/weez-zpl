@@ -1,5 +1,5 @@
 {
-    "name": "vendor/weez-zpl",
+    "name": "weez/zpl",
     "description": "Description of project weez-zpl.",
     "authors": [
         {
@@ -20,12 +20,6 @@
         "psr-0": {
             "tests": "",
             "Weez": "src/"
-        }
-    },
-    "minimum-stability": "beta",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.0.1-dev"
         }
     }
 }
