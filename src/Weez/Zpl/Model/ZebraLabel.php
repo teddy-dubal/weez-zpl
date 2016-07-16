@@ -191,34 +191,4 @@ class ZebraLabel
         $zpl .= ZplUtils::zplCommandSautLigne("XZ"); //End Label
         return $zpl;
     }
-
-    /**
-     * Function use to have a preview of label rendering (not reflects reality).
-     *
-     * Use it just to see disposition on label
-     *
-     * @return Graphics2D
-     */
-    public function getImagePreview()
-    {
-        if ($this->widthDots != null && $this->heightDots != null) {
-            $widthPx  = ZplUtils::convertPointInPixel($this->widthDots);
-            $heightPx = ZplUtils::convertPointInPixel($this->heightDots);
-            $image = new BufferedImage($widthPx, $heightPx, BufferedImage::TYPE_INT_ARGB);
-            $graphic  = $image->createGraphics();
-            $graphic->setRenderingHint(RenderingHints::KEY_ANTIALIASING, RenderingHints::VALUE_ANTIALIAS_ON);
-            $graphic->setComposite(AlphaComposite::Src);
-            $graphic->fillRect(0, 0, $widthPx, $heightPx);
-
-            $graphic->setColor(Color::BLACK);
-            $graphic->setFont(new Font("Arial", Font::BOLD, 11));
-            foreach ($this->zebraElements as $zebraElements) {
-                $zebraElements->drawPreviewGraphic($this->printerOptions, $graphic);
-            }
-            return $image;
-        } else {
-            throw new Exception("Graphics Preview is only available ont label sized");
-        }
-    }
-
 }

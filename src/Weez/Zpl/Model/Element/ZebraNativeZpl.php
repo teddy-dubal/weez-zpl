@@ -7,7 +7,7 @@ use Weez\Zpl\Model\ZebraElement;
 /**
  * Object use if you want add Zpl Code not supported by this library
  * 
- * @author ttropard
+ * 
  * 
  */
 class ZebraNativeZpl extends ZebraElement

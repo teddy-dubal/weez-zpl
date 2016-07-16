@@ -2,7 +2,6 @@
 
 namespace Weez\Zpl\Model\Element;
 
-use Weez\Zpl\Constant\ZebraFont;
 use Weez\Zpl\Constant\ZebraRotation;
 use Weez\Zpl\Model\PrinterOptions;
 use Weez\Zpl\Model\ZebraElement;
@@ -11,7 +10,6 @@ use Weez\Zpl\Utils\ZplUtils;
 /**
  * Zebra element to add Text to specified position.
  * 
- * @author ttropard
  * 
  */
 class ZebraText extends ZebraElement
@@ -29,9 +27,9 @@ class ZebraText extends ZebraElement
 
     /**
      *
-     * @param type $text
      * @param type $positionX
      * @param type $positionY
+     * @param type $text
      * @param type $fontSize
      * @param type $zebraFont
      * @param type $zebraRotation
@@ -73,44 +71,4 @@ class ZebraText extends ZebraElement
 
         return $zpl;
     }
-
-    /**
-     * Used to draw label preview.
-     * This method should be overloader by child class.
-     * 
-     * Default draw a rectangle
-     * 
-     * @param graphic
-     */
-    public function drawPreviewGraphic($printerOptions, $graphic)
-    {
-        if ($this->defaultDrawGraphic) {
-            $top  = 0;
-            $left = 0;
-            if ($this->positionX != null) {
-                $left = ZplUtils::onvertPointInPixel($this->positionX);
-            }
-            if ($this->positionY != null) {
-                $top = ZplUtils::convertPointInPixel($this->positionY);
-            }
-            $font = null;
-            if ($this->fontSize != null && $this->zebraFont != null) {
-                //This element has specified size and font
-                $dimension = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), $this->fontSize, $this->printerOptions->getZebraPPP()->getDotByMm());
-
-                $font = new Font(ZebraFont::findBestEquivalentFontForPreview($this->zebraFont), Font::BOLD, $dimension[0]);
-            } else if ($this->fontSize != null && $this->printerOptions->getDefaultZebraFont() != null) {
-                //This element has specified size, but with default font
-                $dimensionPoint = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), fontSize, $this->printerOptions->getZebraPPP()->getDotByMm());
-                $font           = new Font(ZebraFont::findBestEquivalentFontForPreview($this->printerOptions->getDefaultZebraFont()), Font::BOLD, round(dimensionPoint[0] / 1.33));
-            } else {
-                //Default font on Printer Zebra
-                $dimensionPoint = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), 15, $this->printerOptions->getZebraPPP()->getDotByMm());
-
-                $font = new Font(ZebraFont::findBestEquivalentFontForPreview(ZebraFont::ZEBRA_A), Font::BOLD, $dimensionPoint[0]);
-            }
-            $this->drawTopString($graphic, $font, $text, $left, $top);
-        }
-    }
-
 }

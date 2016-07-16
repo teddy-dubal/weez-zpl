@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- see http://www.phpunit.de/wiki/Documentation -->
-<phpunit bootstrap="../vendor/composer/autoload_real.php"
+<phpunit bootstrap="../vendor/autoload.php"
          colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"

@@ -9,7 +9,7 @@ use Weez\Zpl\Utils\ZplUtils;
  * 
  * Zpl command : ^B3 and ^BY
  * 
- * @author ttropard
+ * 
  * 
  */
 class ZebraBarCode39 extends ZebraBarCode {

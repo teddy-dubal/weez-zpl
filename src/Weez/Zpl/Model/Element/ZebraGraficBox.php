@@ -20,9 +20,16 @@ class ZebraGraficBox extends ZebraElement
     private $height;
     private $borderTickness;
     private $lineColor;
-
-    public function __construct($positionX, $positionY, $width, $height, $borderTickness, $lineColor)
-    {
+    /**
+     *
+     * @param type $positionX
+     * @param type $positionY
+     * @param type $width
+     * @param type $height
+     * @param type $borderTickness
+     * @param type $lineColor
+     */
+    public function __construct($positionX, $positionY, $width, $height, $borderTickness = 1, $lineColor = 'B') {
         $this->positionX      = $positionX;
         $this->positionY      = $positionY;
         $this->width          = $width;
@@ -38,20 +45,14 @@ class ZebraGraficBox extends ZebraElement
         $zpl = '';
         $zpl .= $this->getZplCodePosition();
         $zpl .= "\n";
-        $zpl .= ZplUtils::zplCommand("GB", [$this->width, $this->height, $this->borderTickness,
-                    $this->lineColor]);
+        $zpl .= ZplUtils::zplCommand("GB", [
+                    $this->width,
+                    $this->height,
+                    $this->borderTickness,
+                    $this->lineColor
+        ]);
         $zpl .= "^FS";
         $zpl .= "\n";
         return $zpl;
     }
-
-    protected function getZplCodePosition()
-    {
-        $zpl = '';
-        if ($this->positionX != null && $this->positionY != null) {
-            $zpl .= ZplUtils::zplCommand("FO", [$this->positionX, $this->positionY]);
-        }
-        return $zpl;
-    }
-
 }

@@ -23,7 +23,7 @@ class ZebraPrintMode
     public function __construct($desiredMode, $prePeelSelectB = null)
     {
         $this->desiredMode = $desiredMode;
-        if (null != $prePeelSelectB) {
+        if (!is_null($prePeelSelectB)) {
             if ($prePeelSelectB) {
                 $this->prePeelSelect = ",Y";
             } else {

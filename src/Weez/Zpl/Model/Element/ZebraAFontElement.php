@@ -14,7 +14,7 @@ use Weez\Zpl\Utils\ZplUtils;
  * 
  * ZPL Command : ^A
  * 
- * @author ttropard
+ * 
  * 
  */
 class ZebraAFontElement extends ZebraElement

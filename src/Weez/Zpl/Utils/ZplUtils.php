@@ -9,7 +9,7 @@ use Weez\Zpl\Constant\ZebraPPP;
 /**
  * Common method used to manipulate ZPL
  * 
- * @author ttropard
+ * 
  * 
  */
 class ZplUtils

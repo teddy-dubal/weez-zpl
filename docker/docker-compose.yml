@@ -1,0 +1,5 @@
+appzpl:
+  image: webdevops/php:ubuntu-15.10
+  volumes:
+    - "../:/var/www/app"
+  working_dir: "/var/www/app"

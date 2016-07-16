@@ -7,7 +7,9 @@
             "email": "teddy.dona@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "robgridley/zebra": "^1.0"
+    },
     "require-dev": {
         "fzaninotto/faker": "* v1.6.0",
         "mockery/mockery": "^0.9.5",

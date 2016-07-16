@@ -11,7 +11,7 @@ use Weez\Zpl\Utils\ZplUtils;
  * 
  * Command ZPL : All instruction starting ^B
  * 
- * @author ttropard
+ * 
  * 
  */
 abstract class ZebraBarCode extends ZebraElement
@@ -79,33 +79,7 @@ abstract class ZebraBarCode extends ZebraElement
         return $zpl;
     }
 
-    /**
-     * Used to draw label preview.
-     * This method should be overloader by child class.
-     *
-     * Default draw a rectangle
-     *
-     * @param graphic
-     */
-    public function drawPreviewGraphic($printerOptions, $graphic)
-    {
-        $top  = 0;
-        $left = 0;
-        if ($this->positionX != null) {
-            $left = ZplUtils::convertPointInPixel($this->positionX);
-        }
-        if ($this->positionY != null) {
-            $top = ZplUtils::convertPointInPixel($this->positionY);
-        }
-        $graphic->setColor(Color::BLACK);
-
-        $font = new Font("Arial", Font::BOLD, $this->barCodeHeigth / 2);
-
-        $graphic->drawRect($left, $top, ZplUtils::convertPointInPixel(round($this->moduleWidth * $this->wideBarRatio * 9 * count($this->text))), ZplUtils::convertPointInPixel($this->barCodeHeigth));
-
-        $this->drawTopString($graphic, $font, $this->text, $left, $top);
-    }
-
+   
     public function getBarCodeWidth()
     {
         return $this->moduleWidth;
