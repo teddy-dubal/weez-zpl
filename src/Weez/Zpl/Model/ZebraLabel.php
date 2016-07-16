@@ -24,7 +24,17 @@ class ZebraLabel
      * Height explain in dots
      */
     private $heightDots;
+
+    /**
+     *
+     * @var ZebraPrintMode
+     */
     private $zebraPrintMode;
+
+    /**
+     *
+     * @var PrinterOptions
+     */
     private $printerOptions;
     private $zebraElements  = [];
 
@@ -50,7 +60,7 @@ class ZebraLabel
      * Element is abstract, you should use one of child Element( ZebraText, ZebraBarcode, etc)
      *
      * @param zebraElement
-     * @return
+     * @return self
      */
     public function addElement($zebraElement)
     {
@@ -62,7 +72,7 @@ class ZebraLabel
      * Use to define a default Zebra font on the label
      *
      * @param defaultZebraFont
-     *            the defaultZebraFont to set
+     * @return self
      */
     public function setDefaultZebraFont($defaultZebraFont)
     {
@@ -105,6 +115,10 @@ class ZebraLabel
         return $this;
     }
 
+    /**
+     *
+     * @return PrinterOptions
+     */
     public function getPrinterOptions()
     {
         return $this->printerOptions;
@@ -113,6 +127,7 @@ class ZebraLabel
     public function setPrinterOptions($printerOptions)
     {
         $this->printerOptions = $printerOptions;
+        return $this;
     }
 
     /**
@@ -148,6 +163,7 @@ class ZebraLabel
     public function setZebraElements($zebraElements)
     {
         $this->zebraElements = $zebraElements;
+        return $this;
     }
 
     public function getZplCode()

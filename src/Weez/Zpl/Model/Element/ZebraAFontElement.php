@@ -2,7 +2,6 @@
 namespace Weez\Zpl\Model\Element;
 
 use Weez\Zpl\Constant\ZebraRotation;
-use Weez\Zpl\Model\PrinterOptions;
 use Weez\Zpl\Model\ZebraElement;
 use Weez\Zpl\Utils\ZplUtils;
 

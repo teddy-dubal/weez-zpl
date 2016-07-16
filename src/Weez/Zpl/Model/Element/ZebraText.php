@@ -36,8 +36,7 @@ class ZebraText extends ZebraElement
      * @param type $zebraFont
      * @param type $zebraRotation
      */
-    public function __construct($text, $positionX, $positionY, $fontSize = null, $zebraFont = null, $zebraRotation = null)
-    {
+    public function __construct($positionX, $positionY, $text, $fontSize = null, $zebraFont = null, $zebraRotation = null) {
         $this->zebraFont     = $zebraFont;
         $this->fontSize      = $fontSize;
         $this->zebraRotation = $zebraRotation ? : new ZebraRotation(ZebraRotation::NORMAL);
@@ -51,20 +50,20 @@ class ZebraText extends ZebraElement
      * @see fr.w3blog.zpl.model.element.ZebraElement#getZplCode(fr.w3blog.zpl.model.PrinterOptions)
      */
 
-    public function getZplCode($printerOptions = null)
-    {
+    public function getZplCode($_printerOptions = null) {
+        $printerOptions = $_printerOptions? : $this->printerOptions;
         $zpl = '';
         $zpl .= $this->getZplCodePosition();
-
-        if ($this->fontSize != null && $this->zebraFont != null) {
+        
+        if (!is_null($this->fontSize) && !is_null($this->zebraFont)) {
             //This element has specified size and font
-            $dimension = ZplUtils::extractDotsFromFont($this->zebraFont, $this->fontSize, $this->printerOptions->getZebraPPP());
+            $dimension = ZplUtils::extractDotsFromFont($this->zebraFont, $this->fontSize, $printerOptions->getZebraPPP());
             $zpl .= ZplUtils::zplCommand("A", [$this->zebraFont->getLetter() . $this->zebraRotation->getLetter(),
                         $dimension[0], $dimension[1]]);
-        } else if ($this->fontSize != null && $this->printerOptions->getDefaultZebraFont() != null) {
+        } else if (!is_null($this->fontSize) && !is_null($printerOptions->getDefaultZebraFont())) {
             //This element has specified size, but with default font
-            $dimension = ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), $this->fontSize, $this->printerOptions->getZebraPPP());
-            $zpl .= ZplUtils::zplCommand("A", [$this->printerOptions->getDefaultZebraFont()->getLetter() . $this->zebraRotation->getLetter(),
+            $dimension = ZplUtils::extractDotsFromFont($printerOptions->getDefaultZebraFont(), $this->fontSize, $printerOptions->getZebraPPP());
+            $zpl .= ZplUtils::zplCommand("A", [$printerOptions->getDefaultZebraFont()->getLetter() . $this->zebraRotation->getLetter(),
                         $dimension[0], $dimension[1]]);
         }
 

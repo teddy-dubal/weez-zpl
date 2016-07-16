@@ -99,7 +99,7 @@ class ZplUtils
     {
         $tab = [];
 
-        if (ZebraFont::ZEBRA_ZERO == $zebraFont && ZebraPPP::DPI_300 == $zebraPPP) {
+        if (ZebraFont::ZEBRA_ZERO == $zebraFont->getLetter() && ZebraPPP::DPI_300 == $zebraPPP) {
 //We use ratio to converted (based on ratio used by Zebra Designer Tools)
             $tab[0] = round($fontSize * 4.16); //Heigth
             $tab[1] = round($fontSize * 4.06); //With

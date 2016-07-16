@@ -2,7 +2,6 @@
 
 namespace Weez\Zpl\Model\Element;
 
-use Weez\Zpl\Constant\ZebraRotation;
 use Weez\Zpl\Utils\ZplUtils;
 
 /**
@@ -13,8 +12,7 @@ use Weez\Zpl\Utils\ZplUtils;
  * @author matthiasvets
  * 
  */
-class ZebraBarCode128 extends ZebraBarCode
-{
+class ZebraBarCode128 extends ZebraBarCode {
 
     private $checkDigit43 = false;
     /**

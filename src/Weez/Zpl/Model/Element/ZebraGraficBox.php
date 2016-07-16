@@ -34,8 +34,7 @@ class ZebraGraficBox extends ZebraElement
     /* (non-Javadoc)
      * @see fr.w3blog.zpl.model.element.ZebraElement#getZplCode(fr.w3blog.zpl.model.PrinterOptions)
      */
-    public function getZplCode($printerOptions)
-    {
+    public function getZplCode($printerOptions = null) {
         $zpl = '';
         $zpl .= $this->getZplCodePosition();
         $zpl .= "\n";
