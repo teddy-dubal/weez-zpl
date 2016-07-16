@@ -119,6 +119,20 @@ class ZplUtils
     {
         return round($point * 1.33);
     }
+    /**
+     * Convert pixel(px) in dot
+     *
+     * @param point
+     * @return
+     */
+    public static function convertPixelInDot($pixel) {
+        //DPI from fabric.js
+        $DPI  = 96;
+        $rate = $DPI / 25.4;
+        return ($pixel / $rate) * (0.1 / 2.54);
+        //round($mm * 0.1 / 2.54 * 203.2)
+//        return round($point * 1.33);
+    }
 
     /**
      * Function used to converted ASCII >127 in \hexaCode accepted by ZPL language
