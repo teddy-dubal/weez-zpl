@@ -125,13 +125,11 @@ class ZplUtils
      * @param point
      * @return
      */
-    public static function convertPixelInDot($pixel) {
+    public static function convertPixelInDot($pixel, $zebraPPP) {
         //DPI from fabric.js
         $DPI  = 96;
         $rate = $DPI / 25.4;
-        return ($pixel / $rate) * (0.1 / 2.54);
-        //round($mm * 0.1 / 2.54 * 203.2)
-//        return round($point * 1.33);
+        return round(($pixel / $rate) * $zebraPPP);
     }
 
     /**
