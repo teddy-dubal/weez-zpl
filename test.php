@@ -1,13 +1,4 @@
 <?php
-
-use Weez\Zpl\Constant\ZebraFont;
-use Weez\Zpl\Model\Element\ZebraBarCode39;
-use Weez\Zpl\Model\Element\ZebraGraficBox;
-use Weez\Zpl\Model\Element\ZebraImage;
-use Weez\Zpl\Model\Element\ZebraQrCode;
-use Weez\Zpl\Model\Element\ZebraText;
-use Weez\Zpl\Model\ZebraLabel;
-
 /*
  * The MIT License
  *
@@ -32,8 +23,17 @@ use Weez\Zpl\Model\ZebraLabel;
  * THE SOFTWARE.
  */
 
+use Faker\Factory;
+use Weez\Zpl\Constant\ZebraFont;
+use Weez\Zpl\Model\Element\ZebraBarCode39;
+use Weez\Zpl\Model\Element\ZebraGraficBox;
+use Weez\Zpl\Model\Element\ZebraImage;
+use Weez\Zpl\Model\Element\ZebraQrCode;
+use Weez\Zpl\Model\Element\ZebraText;
+use Weez\Zpl\Model\ZebraLabel;
+
 /**
- * Description of test
+ * 
  *
  * @author teddy
  */
@@ -42,10 +42,12 @@ $vendorDir = $rootDir . '/vendor/';
 
 require_once $vendorDir . 'autoload.php';
 
-//$faker      = Factory::create();
-//        $fakerImage = $faker->image(null, 200, 200);
+$faker      = Factory::create();
+$fakerImage = $faker->image(null, 150, 150, 'transport', true);
+//Init Label
 $zebraLabel = new ZebraLabel(912, 912);
 $zebraLabel->setDefaultZebraFont(new ZebraFont(ZebraFont::ZEBRA_ZERO));
+//Add Text element
 $zebraLabel->addElement(new ZebraText(10, 84, "Product:", 14));
 $zebraLabel->addElement(new ZebraText(395, 84, "Camera", 14));
 
@@ -64,7 +66,9 @@ $zebraLabel->addElement(new ZebraText(10, 520, "Ref log:", 11));
 $zebraLabel->addElement(new ZebraText(180, 520, "0035", 11));
 $zebraLabel->addElement(new ZebraText(10, 596, "Ref client:", 11));
 $zebraLabel->addElement(new ZebraText(180, 599, "1234", 11));
-$zebraLabel->addElement(new ZebraImage(350, 650, $rootDir . '/assets/img/test_150.png'));
-$zebraLabel->addElement(new ZebraQrCode(350, 750, 'test'));
+//Add Image from Url
+$zebraLabel->addElement(new ZebraImage(350, 850, $fakerImage));
+//Add Qr Code
+$zebraLabel->addElement(new ZebraQrCode(350, 297, 'test'));
 
 echo $zebraLabel->getZplCode();
