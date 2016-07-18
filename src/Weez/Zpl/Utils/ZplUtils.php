@@ -121,15 +121,12 @@ class ZplUtils
     }
     /**
      * Convert pixel(px) in dot
-     *
-     * @param point
-     * @return
+     * @param float $mm
+     * @param float $zebraPPP
+     * @return float
      */
-    public static function convertPixelInDot($pixel, $zebraPPP) {
-        //DPI from fabric.js
-        $DPI  = 96;
-        $rate = $DPI / 25.4;
-        return round(($pixel / $rate) * $zebraPPP);
+    public static function convertMmInDot($mm, $zebraPPP = ZebraPPP::DPI_203) {
+        return round($mm * $zebraPPP);
     }
 
     /**
