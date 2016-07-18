@@ -32,8 +32,9 @@ class ZebraImage extends ZebraElement {
         $this->positionY      = $positionY;
     }
 
-    /* (non-Javadoc)
-     * @see fr.w3blog.zpl.model.element.ZebraElement#getZplCode(fr.w3blog.zpl.model.PrinterOptions)
+    /**
+     *
+     *  {@inheritdoc}
      */
     public function getZplCode($printerOptions = null) {
         $bytesPerRow = $this->ressource->width();

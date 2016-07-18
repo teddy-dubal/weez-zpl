@@ -8,9 +8,6 @@ use Weez\Zpl\Constant\ZebraPPP;
 
 /**
  * Common method used to manipulate ZPL
- * 
- * 
- * 
  */
 class ZplUtils
 {
@@ -42,12 +39,10 @@ class ZplUtils
 
     /**
      * Method to quickly generate zpl code with command and variable
-     * 
-     * @param command
-     *            Command (without ^)
-     * @param variables
-     *            list variable
-     * @return
+     *
+     * @param string $command Command (without ^)
+     * @param array $variables list variable
+     * @return string
      */
     public static function zplCommand($command, $variables = null)
     {
@@ -71,11 +66,9 @@ class ZplUtils
     /**
      * Method to quickly generate zpl code with command and variable
      *
-     * @param command
-     *            Command (without ^)
-     * @param variables
-     *            list variable
-     * @return
+     * @param string $command Command (without ^)
+     * @param array $variables
+     * @return string
      */
     public static function zplCommandSautLigne($command, $variables = null)
     {
@@ -90,9 +83,9 @@ class ZplUtils
      * Fonts and PPP are not all supported.
      * Please complete this method or use dot in yous params
      *
-     * @param zebraFont
-     * @param fontSize
-     * @param zebraPPP
+     * @param ZebraFont $zebraFont
+     * @param int $fontSize
+     * @param ZebraPPP $zebraPPP
      * @return array[height,width] in dots
      */
     public static function extractDotsFromFont($zebraFont, $fontSize, $zebraPPP)
@@ -100,7 +93,7 @@ class ZplUtils
         $tab = [];
 
         if (ZebraFont::ZEBRA_ZERO == $zebraFont->getLetter() && ZebraPPP::DPI_300 == $zebraPPP) {
-//We use ratio to converted (based on ratio used by Zebra Designer Tools)
+            //We use ratio to converted (based on ratio used by Zebra Designer Tools)
             $tab[0] = round($fontSize * 4.16); //Heigth
             $tab[1] = round($fontSize * 4.06); //With
         } else {
@@ -112,8 +105,8 @@ class ZplUtils
     /**
      * Convert point(pt) in pixel(px)
      * 
-     * @param point
-     * @return
+     * @param int $point
+     * @return float
      */
     public static function convertPointInPixel($point)
     {
@@ -132,8 +125,7 @@ class ZplUtils
     /**
      * Function used to converted ASCII >127 in \hexaCode accepted by ZPL language
      * 
-     * @param str
-     *            str
+     * @param string $str
      * @return string with charactere remove
      */
     public static function convertAccentToZplAsciiHexa($str)

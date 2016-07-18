@@ -22,12 +22,12 @@ class ZebraGraficBox extends ZebraElement
     private $lineColor;
     /**
      *
-     * @param type $positionX
-     * @param type $positionY
-     * @param type $width
-     * @param type $height
-     * @param type $borderTickness
-     * @param type $lineColor
+     * @param float $positionX
+     * @param float $positionY
+     * @param float $width
+     * @param float $height
+     * @param int $borderTickness
+     * @param string $lineColor
      */
     public function __construct($positionX, $positionY, $width, $height, $borderTickness = 1, $lineColor = 'B') {
         $this->positionX      = $positionX;
@@ -38,8 +38,9 @@ class ZebraGraficBox extends ZebraElement
         $this->lineColor      = $lineColor;
     }
 
-    /* (non-Javadoc)
-     * @see fr.w3blog.zpl.model.element.ZebraElement#getZplCode(fr.w3blog.zpl.model.PrinterOptions)
+    /**
+     *
+     * {@inheritdoc}
      */
     public function getZplCode($printerOptions = null) {
         $zpl = '';

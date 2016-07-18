@@ -5,7 +5,6 @@ namespace Weez\Zpl\Model;
 use Weez\Zpl\Constant\ZebraPPP;
 
 /**
- * Description of PrinterOptions
  *
  * @author teddy
  */
@@ -15,14 +14,17 @@ class PrinterOptions
     private $zebraPPP;
     private $defaultZebraFont = null;
     private $defaultFontSize  = null;
-
+    /**
+     *
+     * @param ZebraPPP|null $zebraPPP
+     */
     public function __construct($zebraPPP = null)
     {
         $this->zebraPPP = $zebraPPP ? : new ZebraPPP(ZebraPPP::DPI_300);
     }
 
     /**
-     * @return the zebraPPP
+     * @return ZebraPPP
      */
     public function getZebraPPP()
     {
@@ -30,8 +32,9 @@ class PrinterOptions
     }
 
     /**
-     * @param zebraPPP
-     *            the zebraPPP to set
+     *
+     * @param ZebraPPP $zebraPPP
+     * @return self
      */
     public function setZebraPPP($zebraPPP)
     {
@@ -40,7 +43,8 @@ class PrinterOptions
     }
 
     /**
-     * @return the defaultZebraFont
+     *
+     * @return ZebraFont
      */
     public function getDefaultZebraFont()
     {
@@ -48,7 +52,8 @@ class PrinterOptions
     }
 
     /**
-     * @return the defaultFontSize
+     *
+     * @return float
      */
     public function getDefaultFontSize()
     {
@@ -56,8 +61,9 @@ class PrinterOptions
     }
 
     /**
-     * @param defaultZebraFont
-     *            the defaultZebraFont to set
+     *
+     * @param ZebraFont $defaultZebraFont
+     * @return self
      */
     public function setDefaultZebraFont($defaultZebraFont)
     {
@@ -66,8 +72,9 @@ class PrinterOptions
     }
 
     /**
-     * @param defaultFontSize
-     *            the defaultFontSize to set
+     *
+     * @param float $defaultFontSize
+     * @return \Weez\Zpl\Model\PrinterOptions
      */
     public function setDefaultFontSize($defaultFontSize)
     {

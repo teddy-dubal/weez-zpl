@@ -1,7 +1,9 @@
 <?php
 namespace Weez\Zpl\Model\Element;
 
+use Weez\Zpl\Constant\ZebraFont;
 use Weez\Zpl\Constant\ZebraRotation;
+use Weez\Zpl\Model\PrinterOptions;
 use Weez\Zpl\Model\ZebraElement;
 use Weez\Zpl\Utils\ZplUtils;
 
@@ -26,16 +28,13 @@ class ZebraAFontElement extends ZebraElement
     private $dotsWidth;
 
     /**
+     *
      * Constructor to use if you want have non-horizontal text.
      * 
-     * @param zebraFont
-     *            font zebra
-     * @param zebraRotation
-     *            text rotation
-     * @param dotHeigth
-     *            height explain in dots
-     * @param dotsWidth
-     *            height explain in dots
+     * @param ZebraFont $zebraFont
+     * @param int $zebraRotation
+     * @param float $dotHeigth height explain in dots
+     * @param float $dotsWidth width explain in dots
      */
     public function __construct($zebraFont, $zebraRotation, $dotHeigth, $dotsWidth)
     {
@@ -45,10 +44,11 @@ class ZebraAFontElement extends ZebraElement
         $this->dotsWidth      = $dotsWidth;
     }
 
-    /* (non-Javadoc)
-     * @see fr.w3blog.zpl.model.ZebraElement#getZplCode(fr.w3blog.zpl.model.PrinterOptions)
+/**
+     *
+     * @param PrinterOptions $printerOptions
+     * @return string
      */
-
     public function getZplCode($printerOptions = null)
     {
         return ZplUtils::zplCommandSautLigne("A", [

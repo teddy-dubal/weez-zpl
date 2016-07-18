@@ -6,7 +6,6 @@ namespace Weez\Zpl\Model;
 use Weez\Zpl\Utils\ZplUtils;
 
 /**
- * Description of ZebraElement
  *
  * @author teddy
  */
@@ -23,15 +22,17 @@ abstract class ZebraElement {
     protected $positionY;
 
     /**
-     * @return the positionX
+     *
+     * @return float
      */
     public function getPositionX() {
         return $this->positionX;
     }
 
     /**
-     * @param positionX
-     *            the positionX to set
+     *
+     * @param float $positionX
+     * @return self
      */
     public function setPositionX($positionX) {
         $this->positionX = $positionX;
@@ -39,15 +40,17 @@ abstract class ZebraElement {
     }
 
     /**
-     * @return the positionY
+     *
+     * @return float
      */
     public function getPositionY() {
         return $this->positionY;
     }
 
     /**
-     * @param positionY
-     *            the positionY to set
+     *
+     * @param float $positionY
+     * @return self
      */
     public function setPositionY($positionY) {
         $this->positionY = $positionY;
@@ -55,18 +58,20 @@ abstract class ZebraElement {
     }
 
     /**
-     * Return Zpl code for this Element
      *
-     * @return
+     * Return Zpl code for this Element
+     * 
+     * @param PrinterOptions|null $printerOptions
+     * @return string
      */
-    public function getZplCode($printerOptions) {
+    public function getZplCode($printerOptions = null) {
         return "";
     }
 
     /**
      * Function used by child class if you want to set position before draw your element.
      *
-     * @return
+     * @return string
      */
     protected function getZplCodePosition() {
         $zpl = "";

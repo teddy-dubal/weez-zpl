@@ -4,7 +4,6 @@
 namespace Weez\Zpl\Constant;
 
 /**
- * Description of ZebraFont
  *
  * @author teddy
  */
@@ -19,26 +18,19 @@ class ZebraFont {
     const ZEBRA_G    = "G";
 
     private $letter;
-
+    /**
+     *
+     * @param string $letter
+     */
     public function __construct($letter) {
         $this->letter = $letter;
     }
 
     /**
-     * @return the letter
+     *
+     * @return string
      */
     public function getLetter() {
         return $this->letter;
     }
-
-    /**
-     * Fonction use for preview to find an equivalent font compatible with Graphic2D
-     *
-     * @param zebraFont
-     * @return
-     */
-    public static function findBestEquivalentFontForPreview($zebraFont) {
-        return "Arial";
-    }
-
 }

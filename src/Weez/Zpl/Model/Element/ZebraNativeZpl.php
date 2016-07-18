@@ -7,24 +7,25 @@ use Weez\Zpl\Model\ZebraElement;
 /**
  * Object use if you want add Zpl Code not supported by this library
  * 
- * 
- * 
  */
 class ZebraNativeZpl extends ZebraElement
 {
 
     private $zplCode;
-
+    /**
+     *
+     * @param string $zplCode
+     */
     public function __construct($zplCode)
     {
         $this->zplCode            = $zplCode;
         $this->defaultDrawGraphic = false;
     }
 
-    /* (non-Javadoc)
-     * @see fr.w3blog.zpl.model.ZPLElement#getZplCode()
+    /**
+     *
+     *  {@inheritdoc}
      */
-
     public function getZplCode($printerOptions = null)
     {
         return $this->zplCode;

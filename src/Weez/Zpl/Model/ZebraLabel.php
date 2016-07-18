@@ -2,7 +2,6 @@
 
 namespace Weez\Zpl\Model;
 
-use Exception;
 use Weez\Zpl\Constant\ZebraPrintMode;
 use Weez\Zpl\Utils\ZplUtils;
 
@@ -14,14 +13,17 @@ use Weez\Zpl\Utils\ZplUtils;
 class ZebraLabel
 {
 
-    //put your code here
     /**
      * Width explain in dots
+     *
+     * @var float
      */
     private $widthDots;
 
     /**
      * Height explain in dots
+     *
+     * @var float
      */
     private $heightDots;
 
@@ -36,15 +38,18 @@ class ZebraLabel
      * @var PrinterOptions
      */
     private $printerOptions;
+
+    /**
+     *
+     * @var array
+     */
     private $zebraElements  = [];
 
     /**
      *
-     * @param heightDots
-     *            height explain in dots
-     * @param widthDots
-     *            width explain in dots
-     * @param printerOptions
+     * @param floatheightDots|null height explain in dots
+     * @param float widthDots|null width explain in dots
+     * @param PrinterOptions|null
      */
     public function __construct($widthDots = null, $heightDots = null, $printerOptions = null)
     {
@@ -59,7 +64,7 @@ class ZebraLabel
      *
      * Element is abstract, you should use one of child Element( ZebraText, ZebraBarcode, etc)
      *
-     * @param zebraElement
+     * @param ZebraElement $zebraElement
      * @return self
      */
     public function addElement($zebraElement)
@@ -69,9 +74,15 @@ class ZebraLabel
     }
 
     /**
-     * Use to define a default Zebra font on the label
      *
      * @param defaultZebraFont
+     * @return self
+     */
+
+    /**
+     * Use to define a default Zebra font on the label
+     *
+     * @param ZebraFont $defaultZebraFont
      * @return self
      */
     public function setDefaultZebraFont($defaultZebraFont)
@@ -81,34 +92,49 @@ class ZebraLabel
     }
 
     /**
+     *
      * Use to define a default Zebra font size on the label (11,13,14).
      * Not explain in dots (convertion is processed by library)
      *
-     * @param defaultFontSize
-     *            the defaultFontSize to set
+     * @param int $defaultFontSize
+     * @return self
      */
     public function setDefaultFontSize($defaultFontSize)
     {
         $this->printerOptions->setDefaultFontSize($defaultFontSize);
         return $this;
     }
-
+    /**
+     *
+     * @return float
+     */
     public function getWidthDots()
     {
         return $this->widthDots;
     }
-
+    /**
+     *
+     * @param float $widthDots
+     * @return self
+     */
     public function setWidthDots($widthDots)
     {
         $this->widthDots = $widthDots;
         return $this;
     }
-
+    /**
+     *
+     * @return float
+     */
     public function getHeightDots()
     {
         return $this->heightDots;
     }
-
+    /**
+     *
+     * @param float $heightDots
+     * @return self
+     */
     public function setHeightDots($heightDots)
     {
         $this->heightDots = $heightDots;
@@ -123,7 +149,11 @@ class ZebraLabel
     {
         return $this->printerOptions;
     }
-
+    /**
+     *
+     * @param PrinterOptions $printerOptions
+     * @return self
+     */
     public function setPrinterOptions($printerOptions)
     {
         $this->printerOptions = $printerOptions;
@@ -131,7 +161,8 @@ class ZebraLabel
     }
 
     /**
-     * @return the zebraPrintMode
+     *
+     * @return ZebraPrintMode
      */
     public function getZebraPrintMode()
     {
@@ -139,8 +170,9 @@ class ZebraLabel
     }
 
     /**
-     * @param zebraPrintMode
-     *            the zebraPrintMode to set
+     *
+     * @param ZebraPrintMode $zebraPrintMode
+     * @return ZebraLabel
      */
     public function setZebraPrintMode($zebraPrintMode)
     {
@@ -149,23 +181,29 @@ class ZebraLabel
     }
 
     /**
-     * @return the zebraElements
+     *
+     * @return array
      */
     public function getZebraElements()
     {
         return $this->zebraElements;
     }
 
+
     /**
-     * @param zebraElements
-     *            the zebraElements to set
+     *
+     * @param ZebraElement $zebraElements
+     * @return self
      */
     public function setZebraElements($zebraElements)
     {
         $this->zebraElements = $zebraElements;
         return $this;
     }
-
+    /**
+     *
+     * @return string
+     */
     public function getZplCode()
     {
         $zpl = '';
@@ -173,7 +211,7 @@ class ZebraLabel
         $zpl .= $this->zebraPrintMode->getZplCode();
 
         if ($this->widthDots != null) {
-//Define width for label
+            //Define width for label
             $zpl .= ZplUtils::zplCommandSautLigne("PW", [$this->widthDots]);
         }
 
@@ -181,7 +219,7 @@ class ZebraLabel
             $zpl .= ZplUtils::zplCommandSautLigne("LL", [$this->heightDots]);
         }
 
-//Default Font and Size
+        //Default Font and Size
         if ($this->printerOptions->getDefaultZebraFont() != null && $this->printerOptions->getDefaultFontSize() != null) {
             $zpl .= ZplUtils::zplCommandSautLigne("CF", [ZplUtils::extractDotsFromFont($this->printerOptions->getDefaultZebraFont(), $this->printerOptions->getDefaultFontSize(), $this->printerOptions->getZebraPPP()->getDotByMm())]);
         }

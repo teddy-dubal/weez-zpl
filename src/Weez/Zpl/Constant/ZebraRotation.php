@@ -4,7 +4,6 @@
 namespace Weez\Zpl\Constant;
 
 /**
- * Description of ZebraRotation
  *
  * @author teddy
  */
@@ -16,13 +15,16 @@ class ZebraRotation {
     const READ_FROM_BOTTOM = "B";
 
     private $letter;
-
+    /**
+     *
+     * @param string $letter
+     */
     public function __construct($letter) {
         $this->letter = $letter;
     }
 
     /**
-     * @return the letter
+     * @return string
      */
     public function getLetter() {
         return $this->letter;

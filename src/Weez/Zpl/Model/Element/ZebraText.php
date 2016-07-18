@@ -14,25 +14,39 @@ use Weez\Zpl\Utils\ZplUtils;
  */
 class ZebraText extends ZebraElement
 {
-
+    /**
+     *
+     * @var \Weez\Zpl\Constant\ZebraFont
+     */
     protected $zebraFont = null;
-
     /**
      * Explain Font Size (11,13,14).
      * Not in dots.
+     *
+     * @var int
      */
-    protected $fontSize      = null;
+    protected $fontSize  = null;
+
+    /**
+     *
+     * @var int
+     */
     protected $zebraRotation;
+
+    /**
+     *
+     * @var string
+     */
     protected $text;
 
     /**
      *
-     * @param type $positionX
-     * @param type $positionY
-     * @param type $text
-     * @param type $fontSize
-     * @param type $zebraFont
-     * @param type $zebraRotation
+     * @param float $positionX
+     * @param float $positionY
+     * @param string $text
+     * @param int $fontSize
+     * @param ZebraFont $zebraFont
+     * @param int $zebraRotation
      */
     public function __construct($positionX, $positionY, $text, $fontSize = null, $zebraFont = null, $zebraRotation = null) {
         $this->zebraFont     = $zebraFont;
@@ -44,10 +58,11 @@ class ZebraText extends ZebraElement
         $this->printerOptions = new PrinterOptions();
     }
 
-    /* (non-Javadoc)
-     * @see fr.w3blog.zpl.model.element.ZebraElement#getZplCode(fr.w3blog.zpl.model.PrinterOptions)
+    
+    /**
+     *
+     *  {@inheritdoc}
      */
-
     public function getZplCode($_printerOptions = null) {
         $printerOptions = $_printerOptions? : $this->printerOptions;
         $zpl = '';
