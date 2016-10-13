@@ -208,6 +208,10 @@ class ZebraLabel
     {
         $zpl = '';
         $zpl .= ZplUtils::zplCommandSautLigne("XA"); //Start Label
+        $zpl .= ZplUtils::zplCommandSautLigne("LH", [0, 0]); // Rotation : reset
+        $zpl .= ZplUtils::zplCommandSautLigne("FW", ['N', 0]); // Rotation : reset
+        $zpl .= ZplUtils::zplCommandSautLigne("PO", ['N']); //Print orientation : normal
+        $zpl .= ZplUtils::zplCommandSautLigne("CF", [0]); //Start Label
         $zpl .= $this->zebraPrintMode->getZplCode();
 
         if ($this->widthDots != null) {

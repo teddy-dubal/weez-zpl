@@ -25,10 +25,8 @@
 
 use Faker\Factory;
 use Weez\Zpl\Constant\ZebraFont;
-use Weez\Zpl\Model\Element\ZebraBarCode39;
+use Weez\Zpl\Constant\ZebraPrintMode;
 use Weez\Zpl\Model\Element\ZebraGraficBox;
-use Weez\Zpl\Model\Element\ZebraImage;
-use Weez\Zpl\Model\Element\ZebraQrCode;
 use Weez\Zpl\Model\Element\ZebraText;
 use Weez\Zpl\Model\ZebraLabel;
 
@@ -45,7 +43,8 @@ require_once $vendorDir . 'autoload.php';
 $faker      = Factory::create();
 $fakerImage = $faker->image(null, 150, 150, 'transport', true);
 //Init Label
-$zebraLabel = new ZebraLabel(912, 912);
+$zebraLabel = new ZebraLabel(); //8x3 = 608x1624
+//$zebraLabel->setZebraPrintMode(new ZebraPrintMode(ZebraPrintMode::CUTTER));
 $zebraLabel->setDefaultZebraFont(new ZebraFont(ZebraFont::ZEBRA_ZERO));
 //Add Text element
 $zebraLabel->addElement(new ZebraText(10, 84, "Product:", 14));

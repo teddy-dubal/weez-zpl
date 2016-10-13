@@ -58,7 +58,8 @@ class ZebraPrintMode
      */
     public function getZplCode()
     {
-        return "^MM" . $this->desiredMode . $this->prePeelSelect . "\n";
+        $zpl = "^MM" . $this->desiredMode . $this->prePeelSelect . PHP_EOL;
+        return $zpl;
     }
 
 }
