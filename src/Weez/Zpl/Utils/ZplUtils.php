@@ -70,7 +70,7 @@ class ZplUtils
      * @param array $variables
      * @return string
      */
-    public static function zplCommandSautLigne($command, $variables = null)
+    public static function zplCommandSautLigne($command, $variables = [])
     {
         $zpl = self::zplCommand($command, $variables);
         $zpl .= "\n";
