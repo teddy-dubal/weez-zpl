@@ -44,7 +44,7 @@ class ZplUtils
      * @param array $variables list variable
      * @return string
      */
-    public static function zplCommand($command, $variables = null)
+    public static function zplCommand($command, $variables = [])
     {
         $zpl          = '';
         $zpl .= "^";
