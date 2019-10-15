@@ -44,7 +44,7 @@ class ZplUtils
      * @param array $variables list variable
      * @return string
      */
-    public static function zplCommand($command, $variables = [])
+    public static function zplCommand($command, $variables = array())
     {
         $zpl          = '';
         $zpl .= "^";
@@ -70,7 +70,7 @@ class ZplUtils
      * @param array $variables
      * @return string
      */
-    public static function zplCommandSautLigne($command, $variables = [])
+    public static function zplCommandSautLigne($command, $variables = array())
     {
         $zpl = self::zplCommand($command, $variables);
         $zpl .= "\n";
